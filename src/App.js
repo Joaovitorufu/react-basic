@@ -3,17 +3,14 @@ import './App.css';
 import { Component } from 'react';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.handlePClick = this.handlePClick.bind(this);
 
-    this.state = {
+    state = {
       name: 'João Vitor',
       counter: 0
     };
-  }
+  
 
-handlePClick (){
+handlePClick= () =>{
   this.setState({name: 'Rafa'}); // para o this funcionar nesse caso teremos que fazer um bind com o this --linha 8
 }
 
