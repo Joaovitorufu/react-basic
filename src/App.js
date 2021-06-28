@@ -1,44 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
+import {PostCard} from './components/PostCard'
 
 class App extends Component {
 
     state = {
-      name: 'João Vitor',
-      counter: 0
+      posts: []
     };
   
+  componentDidMount(){
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then(response => response.json()) //convertendo para json que retorna outra promisse
+      .then (posts => this.setState({posts})) // setando os posts
+  }
 
-handlePClick= () =>{
-  this.setState({name: 'Rafa'}); // para o this funcionar nesse caso teremos que fazer um bind com o this --linha 8
-}
-
-handleAClick= (event) => { 
-  event.preventDefault(); //preventdefault previne um evento que iria acontecer por default, ou seja, irá acontecer o que estiver dentro do metodo e não irá abrir a pagina para a documentação do react.
-  const {counter} = this.state;
-  this.setState({counter : counter +1}) //sempre que chamar esse metodo atualiza o contador com 1 a mais
-}
 render(){
-  const {name, counter} = this.state; //renderizando em tela os meus estados
-
+  const {posts} = this.state;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p onClick={this.handlePClick}> {/* onClick serve aqui para ativar o metodo quando ser clicado */}
-          {name} {counter}
-        </p>
-        <a
-          onClick={this.handleAClick}
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {posts.map(post =>(
+        <PostCard
+          key={post.id}
+         post = {post}/>
+      ))}
     </div>
   );
 }
