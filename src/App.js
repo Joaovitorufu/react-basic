@@ -11,6 +11,10 @@ class App extends Component {
     };
   }
 
+handlePClick (){ //metodo criado para dar um console log a partir do click = usado na linha 25
+  console.log('clicado');
+}
+
 render(){
   const {name} = this.state;
 
@@ -18,7 +22,7 @@ render(){
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
+        <p onClick={this.handlePClick}> {/* onClick serve aqui para ativar o metodo quando ser clicado */}
           {name}
         </p>
         <a
