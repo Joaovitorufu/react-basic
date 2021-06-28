@@ -1,6 +1,7 @@
 import './App.css';
 import { Component } from 'react';
 import {PostCard} from './components/PostCard'
+import { loadPosts } from './utils/load-posts';
 
 class App extends Component {
 
@@ -8,10 +9,12 @@ class App extends Component {
       posts: []
     };
   
-  componentDidMount(){
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json()) //convertendo para json que retorna outra promisse
-      .then (posts => this.setState({posts})) // setando os posts
+  async componentDidMount(){
+  await this.loadPosts();
+  }
+  loadPosts = async () => {
+    const post = await loadPosts();
+    this.setState ({posts:post});
   }
 
 render(){
